@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Services – Women's Health Services</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* === ANIMATIONS === */
+    @keyframes fadeInDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate {
+      opacity: 0;
+      animation: fadeInDown 1.5s ease forwards;
+      animation-fill-mode: both;
+    }
+
+    /* === NAVIGATION BAR === */
+    nav {
+      width: 100%;
+      background-color: #ffffff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .nav-logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #d46a92;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      color: #333;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #d46a92;
+    }
+
+    /* === SERVICES SECTION === */
+    .services-section {
+      padding: 8rem 2rem 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: center;
+    }
+
+    .services-section h1 {
+      font-size: 3rem;
+      margin-bottom: 3rem;
+      color: #b23b6b;
+      text-align: center;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      width: 100%;
+    }
+
+    .service-card {
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .service-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .service-card h3 {
+      font-size: 1.4rem;
+      margin: 1rem 0 0.5rem;
+      color: #8e44ad;
+    }
+
+    .service-card p {
+      font-size: 1rem;
+      padding: 0 1rem 1.5rem;
+      color: #555;
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 768px) {
+      .services-section h1 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="nav-logo">Women's Health</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="https://www.medentmobile.com/portal/index.php?practice_id=4XG87sqe&main_section=online_schedule_start&locid=400">Book an Appointment</a>
+      <a href="https://www.medentmobile.com/portal/index.php?practice_id=4XG87sqe">Patient Portal</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">Providers</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+  </nav>
+
+  <!-- Services Grid -->
+  <section class="services-section">
+    <h1 class="animate" style="animation-delay: 0.1s;">Our Services</h1>
+    <div class="services-grid">
+      <div class="service-card animate" style="animation-delay: 0.2s;">
+        <img src="images/annual_exam.jpg" alt="Annual Exams">
+        <h3>Comprehensive Women's Health Exams</h3>
+        <p>Our expert team offers a full range of gynecology services, including comprehensive women's health exams, Pap smears, and breast exams.</p>
+      </div>
+
+      <div class="service-card animate" style="animation-delay: 0.4s;">
+        <img src="images/prenatal_care.jpg" alt="Prenatal Care">
+        <h3>Birth Control</h3>
+        <p>We offer counseling and prescribing of birth control options including injections, IUDs, oral contraceptives, and patches.</p>
+      </div>
+
+      <div class="service-card animate" style="animation-delay: 0.6s;">
+        <img src="images/menopause_support.jpg" alt="Menopause Support">
+        <h3>Minimally Invasive Office Procedures</h3>
+        <p>Specialized care including colposcopies and biopsies with easier recovery and quicker diagnosis.</p>
+      </div>
+
+      <div class="service-card animate" style="animation-delay: 0.8s;">
+        <img src="images/contraception.jpg" alt="Contraception Counseling">
+        <h3>Genitourinary Concerns</h3>
+        <p>Non-surgical treatment for pessary fitting, pelvic floor therapy, and urology referrals.</p>
+      </div>
+
+      <div class="service-card animate" style="animation-delay: 1.0s;">
+        <img src="images/infection_treatment.jpg" alt="Infection Treatment">
+        <h3>Menopause Management</h3>
+        <p>Supportive, personalized care through all stages of menopause, including treatment for related symptoms.</p>
+      </div>
+
+      <div class="service-card animate" style="animation-delay: 1.2s;">
+        <img src="images/fertility.jpg" alt="Fertility Support">
+        <h3>Sexual Health and Wellness</h3>
+        <p>Services such as STD testing, counseling, and sexual dysfunction support to help maintain healthy sex lives.</p>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
