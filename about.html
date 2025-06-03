@@ -99,9 +99,10 @@
 
     .about-image {
       flex: 1;
-      min-width: 300px;
+      min-width: 500px;
       z-index: 1;
       animation: fadeIn 1.2s ease-out both;
+      margin-left: -195px; /* Image shifted left */
     }
 
     .about-image img {
@@ -159,13 +160,17 @@
       flex: 1;
       min-width: 250px;
       max-width: 400px;
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .team-member-image img {
-      width: 100%;
-      max-width: 250px;
+      width: 250px;
+      height: 250px;
       border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
     }
 
@@ -200,6 +205,10 @@
         display: none;
       }
 
+      .about-image {
+        margin-left: 0;
+      }
+
       .about-text h1 {
         font-size: 2.2rem;
       }
@@ -210,7 +219,7 @@
 
   <!-- Navigation Bar -->
   <nav>
-    <div class="nav-logo">Women's Health</div>
+    <div class="nav-logo">Women's Health Services of Roaring Spring</div>
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="https://www.medentmobile.com/portal/index.php?practice_id=4XG87sqe&main_section=online_schedule_start&locid=400">Book an Appointment</a>
@@ -228,7 +237,7 @@
     <section class="about-hero">
       <div class="vertical-banner"></div>
       <div class="about-image">
-        <img src="https://images.unsplash.com/photo-1588776814546-1b1d6e9c4c57?auto=format&fit=crop&w=800&q=80" alt="Clinic Image">
+        <img src="images/Suzi and Sign.jpg" alt="Clinic Image">
       </div>
       <div class="about-text">
         <h1>About Us</h1>
@@ -248,7 +257,7 @@
           <p>Suzi comes to you with more than 2 decades of nursing experience which is a vast accumulation of Medicine/Surgery/Pediatrics and OBGYN...</p>
         </div>
         <div class="team-member-image">
-          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Suzi Brannock, CRNP">
+          <img src="images/Old Professional Photo.jpg" alt="Suzi Brannock, CRNP">
         </div>
       </div>
 
@@ -258,27 +267,17 @@
           <p>Dr Bisacco presents as a well-seasoned, trained, and experienced Gynecologist...</p>
         </div>
         <div class="team-member-image">
-          <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Dr. Monica Reyes">
+          <img src="images\Bisacco(2).JPEG" alt="Dr. Stephen J. Bisacco">
         </div>
       </div>
 
       <div class="team-member-row">
         <div class="team-member-text">
-          <h3>Dr. John D. Littlejohn, M.D., F.A.C.O.G</h3>
-          <p>Dr. Littlejohn joins as an experienced, trained, and successful Gynecologist...</p>
-        </div>
-        <div class="team-member-image">
-          <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Dr. Elaine Smith">
-        </div>
-      </div>
-
-      <div class="team-member-row reverse">
-        <div class="team-member-text">
           <h3>Siarra Bardell, LPN</h3>
           <p>Siarra is a returnee to the OBGYN field after the closure of a previous practice...</p>
         </div>
         <div class="team-member-image">
-          <img src="https://randomuser.me/api/portraits/women/70.jpg" alt="Dr. Lily Zhang">
+          <img src="images/Siarra Photo.webp" alt="Dr. John D. Littlejohn">
         </div>
       </div>
     </section>
