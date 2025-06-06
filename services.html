@@ -22,7 +22,6 @@
       scroll-behavior: smooth;
     }
 
-    /* === ANIMATIONS === */
     @keyframes fadeInDown {
       0% {
         opacity: 0;
@@ -40,7 +39,6 @@
       animation-fill-mode: both;
     }
 
-    /* === NAVIGATION BAR === */
     nav {
       width: 100%;
       background-color: #ffffff;
@@ -77,7 +75,6 @@
       color: #d46a92;
     }
 
-    /* === SERVICES SECTION === */
     .services-section {
       padding: 8rem 2rem 4rem;
       max-width: 1200px;
@@ -134,17 +131,82 @@
       color: #555;
     }
 
-    /* === RESPONSIVE === */
+    .treatments-section {
+      background-color: #ffffff;
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .treatments-section h2 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      color: #b23b6b;
+    }
+
+    .treatment-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .treatment {
+      background-color: #f0f0f5;
+      border-left: 6px solid #d46a92;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      position: relative;
+    }
+
+    .checkmark {
+      position: absolute;
+      right: 4.5rem;
+      top: 1.5rem;
+      font-size: 4.5rem;
+      color: #b23b6b;
+      background: rgba(255, 255, 255, 0.7);
+      width: 4.8rem;       /* Fixed width */
+      height: 4.8rem;      /* Same as width for perfect circle */
+      border-radius: 50%;
+      display: flex;        /* Use flex to center content */
+      align-items: center;  /* Vertically center */
+      justify-content: center; /* Horizontally center */
+      box-shadow: 0 0 8px 3px rgba(255, 255, 255, 0.5);
+      font-weight: bold;
+      pointer-events: none;
+      padding: 0;           /* Remove padding since width/height control size */
+      line-height: 1;       /* Tight line height */
+    }
+
+    .treatment h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #8e44ad;
+    }
+
+    .treatment p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #444;
+    }
+
     @media (max-width: 768px) {
       .services-section h1 {
         font-size: 2.2rem;
+      }
+      .treatments-section h2 {
+        font-size: 2rem;
+      }
+      .treatment {
+        padding: 1.5rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation Bar -->
   <nav>
     <div class="nav-logo">Women's Health Services of Roaring Spring</div>
     <div class="nav-links">
@@ -158,7 +220,6 @@
     </div>
   </nav>
 
-  <!-- Services Grid -->
   <section class="services-section">
     <h1 class="animate" style="animation-delay: 0.1s;">Our Services</h1>
     <div class="services-grid">
@@ -167,36 +228,49 @@
         <h3>Comprehensive Women's Health Exams</h3>
         <p>Our expert team offers a full range of gynecological services, including comprehensive women's health exams, pap smears, and clinical breast exams. We believe in empowering women to take control of their health and offer patient-centered care with a focus on education and prevention.</p>
       </div>
-
       <div class="service-card animate" style="animation-delay: 0.4s;">
         <img src="images\birthcontrol.webp" alt="Prenatal Care">
         <h3>Birth Control</h3>
-        <p>At Women's Health Services of Roaring Spring, we understand that family planning is an important part of life. We offer counseling and prescribing of many forms of birth control including injections, IUDs, implants, oral contraceptives, and patches.</p>
+        <p>We offer counseling and prescribing of many forms of birth control including injections, IUDs, implants, oral contraceptives, and patches.</p>
       </div>
-
       <div class="service-card animate" style="animation-delay: 0.6s;">
         <img src="images\Office Picture.webp" alt="Menopause Support">
         <h3>Minimally Invasive Office Procedures</h3>
-        <p>Our team of experienced healthcare professionals specialize in minimally invasive in-office procedures, including colposcopies and biopsies. These procedures offer many benefits including less pain, easier recovery, and a quicker diagnosis.</p>
+        <p>Specializing in colposcopies and biopsies, we ensure faster diagnosis and recovery with in-office treatments designed for convenience and care.</p>
       </div>
-
       <div class="service-card animate" style="animation-delay: 0.8s;">
         <img src="images\genitour.jpg" alt="Contraception Counseling">
         <h3>Genitourinary Concerns</h3>
-        <p>We offer non-surgical treatment for pelvic organ prolapse including pessary fitting and management, along with referrals to Urology for surgical needs. We also offer pelvic floor therapy referrals for those who need help targeting those core muscles. </p>
+        <p>Non-surgical pelvic prolapse treatment, pessary fittings, and pelvic floor therapy referrals are available through our office-based approach.</p>
       </div>
-
       <div class="service-card animate" style="animation-delay: 1.0s;">
         <img src="images\menopause.jpg" alt="Infection Treatment">
         <h3>Menopause Management</h3>
-        <p>Our team provides comprehensive menopause management services to help women navigate through this transitional phase of life. We offer individualized treatment plans to manage symptoms such as hot flashes, mood changes, and vaginal dryness.</p>
+        <p>Customized treatment plans for managing menopause symptoms such as hot flashes, mood changes, and dryness to help you thrive during transition.</p>
       </div>
-
       <div class="service-card animate" style="animation-delay: 1.2s;">
         <img src="images\Flower.jpg" alt="Fertility Support">
         <h3>Sexual Health and Wellness</h3>
-        <p>At Women's Health Services of Roaring Spring, we believe that sexual health and wellness are an important part of a woman's overall wellbeing. We offer services such as STD testing and counseling to help our patients maintain optimal gynecological health.</p>
+        <p>We provide STD testing, safe sex counseling, and comprehensive sexual wellness services to support your health in every stage of life.</p>
       </div>
+    </div>
+  </section>
+
+  <section class="treatments-section">
+    <h2 class="animate" style="animation-delay: 0.1s;">Specific Treatments Offered</h2>
+    <div class="treatment-wrapper animate" style="animation-delay: 0.3s;">
+      <div class="treatment"><span class="checkmark">✓</span><h3>General counseling for the adolescent female</h3><p>(description needed)</p></div>
+      <div class="treatment"><span class="checkmark">✓</span><h3>Comprehensive wellness exams such as annual exams</h3><p>(description needed)</p></div>
+      <div class="treatment"><span class="checkmark">✓</span><h3>Pap smears</h3><p>(description needed)</p></div>
+      <div class="treatment"><span class="checkmark">✓</span><h3>Colposcopies for the evaluation of any abnormal pap smear</h3><p>(description needed)</p></div>
+      <div class="treatment"><span class="checkmark">✓</span><h3>Birth Control</h3><p>Counseling for birth control in the form of pills, long-acting reversible contraception, etc.</p></div>
+      <div class="treatment"><span class="checkmark">✓</span><h3>Diagonosis and treatment of various vaginal infections or vaginal problems</h3><p>(description needed)</p></div>
+      <div class="treatment"><span class="checkmark">✓</span><h3>Counseling and treatment for various sexually transmitted diseases</h3><p>(description needed)</p></div>
+      <div class="treatment"><span class="checkmark">✓</span><h3>Diagnosis and treatment of any abnormal vaginal bleeding or menstrual issues</h3><p>(description needed)</p></div>
+      <div class="treatment"><span class="checkmark">✓</span><h3>Menopausal symptoms</h3><p>(description needed)</p></div>
+      <div class="treatment"><span class="checkmark">✓</span><h3>Genitourinary symptoms of menopause (bladder concerns)</h3><p>(description needed)</p></div>
+      <div class="treatment"><span class="checkmark">✓</span><h3>Breast exams and any concerns with the female breast</h3><p>(description needed)</p></div>
+      <div class="treatment"><span class="checkmark">✓</span><h3>Pelvic organ prolapse</h3><p>(description needed)</p></div>
     </div>
   </section>
 
