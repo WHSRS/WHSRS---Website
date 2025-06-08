@@ -54,6 +54,50 @@
       color: #d46a92;
     }
 
+    /* Hamburger icon container */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      width: 25px;
+      height: 20px;
+      justify-content: space-between;
+    }
+
+    .hamburger div {
+      width: 100%;
+      height: 3px;
+      background-color: #d46a92;
+      border-radius: 2px;
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 60px; /* nav height + some padding */
+        right: 0;
+        background: white;
+        height: calc(100vh - 60px);
+        width: 200px;
+        flex-direction: column;
+        padding: 1rem 1.5rem;
+        box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        gap: 1rem;
+      }
+
+      .nav-links.active {
+        transform: translateX(0);
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    /* Adjust main content padding to avoid nav overlap */
     .axonics-wrapper {
       padding-top: 7rem;
       max-width: 1000px;
@@ -78,7 +122,7 @@
       flex-direction: column;
       gap: 2.5rem;
       margin-top: 2rem;
-      align-items: center; /* Center the image containers */
+      align-items: center;
     }
 
     .image-spot {
@@ -88,6 +132,7 @@
       padding: 0.5rem;
       border: 2px solid #d46a92;
       display: inline-block;
+      max-width: 100%;
     }
 
     .image-spot img {
@@ -113,13 +158,20 @@
   <!-- Navigation Bar -->
   <nav>
     <div class="nav-logo">Women's Health Services of Roaring Spring</div>
-    <div class="nav-links">
+
+    <div class="hamburger" id="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+    <div class="nav-links" id="nav-links">
       <a href="index.html">Home</a>
       <a href="about.html">Providers</a>
       <a href="services.html">Services</a>
       <a href="axonics.html">Axonics Therapy</a>
-      <a href="https://www.medentmobile.com/portal/index.php?practice_id=4XG87sqe&main_section=online_schedule_start&locid=400">Book an Appointment</a>
-      <a href="https://www.medentmobile.com/portal/index.php?practice_id=4XG87sqe">Patient Portal</a>
+      <a href="https://www.medentmobile.com/portal/index.php?practice_id=4XG87sqe&main_section=online_schedule_start&locid=400" target="_blank" rel="noopener noreferrer">Book an Appointment</a>
+      <a href="https://www.medentmobile.com/portal/index.php?practice_id=4XG87sqe" target="_blank" rel="noopener noreferrer">Patient Portal</a>
       <a href="contact.html">Contact Us</a>
     </div>
   </nav>
@@ -145,6 +197,22 @@
     </div>
 
   </main>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // Optional: Close menu when a link is clicked (mobile)
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
+    });
+  </script>
 
 </body>
 </html>

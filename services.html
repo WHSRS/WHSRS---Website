@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Services – Women's Health Services</title>
   <style>
     * {
@@ -18,63 +18,145 @@
       overflow-x: hidden;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
-    @keyframes fadeInDown {
-      0% {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .animate {
-      opacity: 0;
-      animation: fadeInDown 1.5s ease forwards;
-      animation-fill-mode: both;
-    }
-
     nav {
       width: 100%;
-      background-color: #ffffff;
+      background-color: #fff;
       padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       position: fixed;
       top: 0;
       left: 0;
-      z-index: 999;
+      z-index: 9999;
       box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 60px;
     }
 
     .nav-logo {
       font-size: 1.5rem;
-      font-weight: bold;
+      font-weight: 700;
       color: #d46a92;
+      user-select: none;
     }
 
+    /* Nav links container */
     .nav-links {
       display: flex;
       gap: 1.5rem;
+      align-items: center;
     }
 
     .nav-links a {
-      color: #333;
       text-decoration: none;
+      color: #333;
+      font-weight: 600;
       font-size: 1rem;
-      transition: color 0.3s;
+      position: relative;
+      padding: 0.25rem 0;
+      transition: color 0.3s ease;
     }
 
-    .nav-links a:hover {
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #d46a92;
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus {
       color: #d46a92;
+      outline: none;
     }
 
+    .nav-links a:hover::after,
+    .nav-links a:focus::after {
+      width: 100%;
+    }
+
+    /* Hamburger button (hidden on desktop) */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 28px;
+      height: 22px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 10001;
+    }
+
+    .hamburger:focus {
+      outline: 2px solid #d46a92;
+      outline-offset: 2px;
+    }
+
+    .hamburger div {
+      width: 28px;
+      height: 3px;
+      background-color: #d46a92;
+      border-radius: 2px;
+      transition: all 0.3s linear;
+      position: relative;
+      transform-origin: 1px;
+    }
+
+    /* Animate hamburger when active */
+    .hamburger.active div:nth-child(1) {
+      transform: rotate(45deg);
+    }
+    .hamburger.active div:nth-child(2) {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    .hamburger.active div:nth-child(3) {
+      transform: rotate(-45deg);
+    }
+
+    /* Mobile nav dropdown */
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 60px;
+        right: 0;
+        height: calc(100vh - 60px);
+        background-color: #fff;
+        flex-direction: column;
+        width: 250px;
+        padding-top: 2rem;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        box-shadow: -3px 0 8px rgba(0,0,0,0.1);
+      }
+
+      .nav-links.open {
+        transform: translateX(0);
+      }
+
+      .nav-links a {
+        font-size: 1.2rem;
+        padding: 1rem 2rem;
+        width: 100%;
+        border-bottom: 1px solid #eee;
+      }
+
+      .nav-links a:last-child {
+        border-bottom: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    /* Page content styles */
     .services-section {
       padding: 8rem 2rem 4rem;
       max-width: 1200px;
@@ -167,17 +249,17 @@
       font-size: 4.5rem;
       color: #b23b6b;
       background: rgba(255, 255, 255, 0.7);
-      width: 4.8rem;       /* Fixed width */
-      height: 4.8rem;      /* Same as width for perfect circle */
+      width: 4.8rem;
+      height: 4.8rem;
       border-radius: 50%;
-      display: flex;        /* Use flex to center content */
-      align-items: center;  /* Vertically center */
-      justify-content: center; /* Horizontally center */
+      display: flex;
+      align-items: center;
+      justify-content: center;
       box-shadow: 0 0 8px 3px rgba(255, 255, 255, 0.5);
       font-weight: bold;
       pointer-events: none;
-      padding: 0;           /* Remove padding since width/height control size */
-      line-height: 1;       /* Tight line height */
+      padding: 0;
+      line-height: 1;
     }
 
     .treatment h3 {
@@ -209,47 +291,52 @@
 
   <nav>
     <div class="nav-logo">Women's Health Services of Roaring Spring</div>
-    <div class="nav-links">
+    <button class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-navigation">
+      <div></div>
+      <div></div>
+      <div></div>
+    </button>
+    <div class="nav-links" id="primary-navigation">
       <a href="index.html">Home</a>
       <a href="about.html">Providers</a>
-      <a href="services.html">Services</a>
+      <a href="services.html" aria-current="page">Services</a>
       <a href="axonics.html">Axonics Therapy</a>
-      <a href="https://www.medentmobile.com/portal/index.php?practice_id=4XG87sqe&main_section=online_schedule_start&locid=400">Book an Appointment</a>
-      <a href="https://www.medentmobile.com/portal/index.php?practice_id=4XG87sqe">Patient Portal</a>
+      <a href="https://www.medentmobile.com/portal/index.php?practice_id=4XG87sqe&main_section=online_schedule_start&locid=400" target="_blank" rel="noopener noreferrer">Book an Appointment</a>
+      <a href="https://www.medentmobile.com/portal/index.php?practice_id=4XG87sqe" target="_blank" rel="noopener noreferrer">Patient Portal</a>
       <a href="contact.html">Contact Us</a>
     </div>
   </nav>
 
   <section class="services-section">
-    <h1 class="animate" style="animation-delay: 0.1s;">Our Services</h1>
+    <h1>Our Services</h1>
     <div class="services-grid">
-      <div class="service-card animate" style="animation-delay: 0.2s;">
-        <img src="images\Doctor.jpg" alt="Annual Exams">
+      <div class="service-card">
+        <img src="images/Doctor.jpg" alt="Annual Exams" />
         <h3>Comprehensive Women's Health Exams</h3>
         <p>Our expert team offers a full range of gynecological services, including comprehensive women's health exams, pap smears, and clinical breast exams. We believe in empowering women to take control of their health and offer patient-centered care with a focus on education and prevention.</p>
       </div>
-      <div class="service-card animate" style="animation-delay: 0.4s;">
-        <img src="images\birthcontrol.webp" alt="Prenatal Care">
+      <div class="service-card">
+        <img src="images/birthcontrol.webp" alt="Prenatal Care" />
         <h3>Birth Control</h3>
         <p>We offer counseling and prescribing of many forms of birth control including injections, IUDs, implants, oral contraceptives, and patches.</p>
       </div>
-      <div class="service-card animate" style="animation-delay: 0.6s;">
-        <img src="images\Office Picture.webp" alt="Menopause Support">
+      <div class="service-card">
+        <img src="images/Office Picture.webp" alt="Menopause Support" />
         <h3>Minimally Invasive Office Procedures</h3>
         <p>Specializing in colposcopies and biopsies, we ensure faster diagnosis and recovery with in-office treatments designed for convenience and care.</p>
       </div>
-      <div class="service-card animate" style="animation-delay: 0.8s;">
-        <img src="images\genitour.jpg" alt="Contraception Counseling">
+      <div class="service-card">
+        <img src="images/genitour.jpg" alt="Contraception Counseling" />
         <h3>Genitourinary Concerns</h3>
         <p>Non-surgical pelvic prolapse treatment, pessary fittings, and pelvic floor therapy referrals are available through our office-based approach.</p>
       </div>
-      <div class="service-card animate" style="animation-delay: 1.0s;">
-        <img src="images\menopause.jpg" alt="Infection Treatment">
+      <div class="service-card">
+        <img src="images/menopause.jpg" alt="Infection Treatment" />
         <h3>Menopause Management</h3>
         <p>Customized treatment plans for managing menopause symptoms such as hot flashes, mood changes, and dryness to help you thrive during transition.</p>
       </div>
-      <div class="service-card animate" style="animation-delay: 1.2s;">
-        <img src="images\Flower.jpg" alt="Fertility Support">
+      <div class="service-card">
+        <img src="images/Flower.jpg" alt="Fertility Support" />
         <h3>Sexual Health and Wellness</h3>
         <p>We provide STD testing, safe sex counseling, and comprehensive sexual wellness services to support your health in every stage of life.</p>
       </div>
@@ -257,8 +344,8 @@
   </section>
 
   <section class="treatments-section">
-    <h2 class="animate" style="animation-delay: 0.1s;">Specific Treatments Offered</h2>
-    <div class="treatment-wrapper animate" style="animation-delay: 0.3s;">
+    <h2>Specific Treatments Offered</h2>
+    <div class="treatment-wrapper">
       <div class="treatment"><span class="checkmark">✓</span><h3>General counseling for the adolescent female</h3></div>
       <div class="treatment"><span class="checkmark">✓</span><h3>Comprehensive wellness exams such as annual exams</h3></div>
       <div class="treatment"><span class="checkmark">✓</span><h3>Pap smears</h3></div>
@@ -274,5 +361,36 @@
     </div>
   </section>
 
+  <script>
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    hamburger.addEventListener('click', () => {
+      const expanded = hamburger.getAttribute('aria-expanded') === 'true' || false;
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', !expanded);
+    });
+
+    // Optional: close menu when clicking a nav link (mobile only)
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          hamburger.classList.remove('active');
+          navLinks.classList.remove('open');
+          hamburger.setAttribute('aria-expanded', false);
+        }
+      });
+    });
+
+    // Optional: close menu on resize if desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', false);
+      }
+    });
+  </script>
 </body>
 </html>
