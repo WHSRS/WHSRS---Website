@@ -20,6 +20,7 @@
       background-color: #ffffff;
       color: #333;
       overflow-x: hidden;
+      padding-top: 70px; /* offset for fixed nav height on desktop */
     }
 
     /* === ANIMATIONS === */
@@ -64,6 +65,24 @@
       font-size: 1.5rem;
       font-weight: bold;
       color: #d46a92;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: default;
+    }
+
+    /* Dropdown toggle button - hidden on desktop */
+    .dropdown-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
+      color: #d46a92;
+      transition: transform 0.3s ease;
+      user-select: none;
     }
 
     .nav-links {
@@ -225,13 +244,121 @@
         justify-content: center;
       }
     }
+
+    /* === MOBILE DROPDOWN MENU (NEW) === */
+    @media (max-width: 1300px) {
+      body {
+        padding-top: 130px; /* taller nav on mobile with dropdown */
+      }
+
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 1rem 1.5rem;
+        max-width: 100%;
+      }
+
+      .dropdown-toggle {
+        display: inline-block; /* show toggle button */
+      }
+
+      .nav-links {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        transition: max-height 0.4s ease, opacity 0.4s ease;
+        background-color: white;
+        margin-top: 0.5rem;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        z-index: 998;
+      }
+
+      .nav-links.show {
+        max-height: 500px;
+        opacity: 1;
+        animation: dropdownOpen 0.4s forwards;
+      }
+
+      .nav-links.hide {
+        animation: dropdownClose 0.4s forwards;
+      }
+
+      .nav-links a {
+        width: 100%;
+        max-width: 320px;
+        padding: 0.75rem 0;
+        font-size: 1.1rem;
+        border-top: 1px solid #eee;
+        text-align: center;
+      }
+
+      .nav-links a:first-child {
+        border-top: none;
+      }
+
+      .nav-links a:hover {
+        color: #d46a92;
+      }
+
+      /* Animate arrow rotation */
+      .dropdown-toggle.open {
+        transform: rotate(180deg);
+        transition: transform 0.3s ease;
+      }
+      .dropdown-toggle.close {
+        transform: rotate(0deg);
+        transition: transform 0.3s ease;
+      }
+      .hero::before {
+        display: none;
+      }
+
+  .hero-strip {
+        display: none;
+      }
+    }
+
+    /* Animations */
+    @keyframes dropdownOpen {
+      0% {
+        opacity: 0;
+        transform: translateY(-10px);
+        max-height: 0;
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+        max-height: 500px;
+      }
+    }
+
+    @keyframes dropdownClose {
+      0% {
+        opacity: 1;
+        transform: translateY(0);
+        max-height: 500px;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-10px);
+        max-height: 0;
+      }
+    }
   </style>
 </head>
 <body>
 
   <!-- Navigation Bar -->
   <nav>
-    <div class="nav-logo">Women's Health Services of Roaring Spring</div>
+    <div class="nav-logo">
+      Women's Health Services of Roaring Spring
+      <button class="dropdown-toggle" aria-label="Toggle navigation menu" aria-expanded="false">&#x25BC;</button>
+    </div>
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="about.html">Providers</a>
@@ -261,6 +388,44 @@
       </div>
     </div>
   </section>
+
+  <script>
+    const toggleBtn = document.querySelector('.dropdown-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    let isOpen = false;
+
+    toggleBtn.addEventListener('click', () => {
+      isOpen = !isOpen;
+      toggleBtn.setAttribute('aria-expanded', String(isOpen));
+
+      if (isOpen) {
+        navLinks.classList.remove('hide');
+        navLinks.classList.add('show');
+        toggleBtn.classList.remove('close');
+        toggleBtn.classList.add('open');
+      } else {
+        navLinks.classList.remove('show');
+        navLinks.classList.add('hide');
+        toggleBtn.classList.remove('open');
+        toggleBtn.classList.add('close');
+      }
+    });
+
+    // Close menu on link click for better UX on mobile
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (isOpen) {
+          isOpen = false;
+          navLinks.classList.remove('show');
+          navLinks.classList.add('hide');
+          toggleBtn.classList.remove('open');
+          toggleBtn.classList.add('close');
+          toggleBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
