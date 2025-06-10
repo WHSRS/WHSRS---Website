@@ -22,7 +22,6 @@
       scroll-behavior: smooth;
     }
 
-    /* === NAVIGATION BAR === */
     nav {
       width: 100%;
       background-color: #ffffff;
@@ -59,7 +58,6 @@
       color: #d46a92;
     }
 
-    /* Hamburger Menu Icon */
     .hamburger {
       display: none;
       flex-direction: column;
@@ -76,11 +74,10 @@
       transition: all 0.3s ease;
     }
 
-    /* === Responsive Styles === */
     @media (max-width: 768px) {
       .nav-links {
         position: fixed;
-        top: 60px; /* below navbar */
+        top: 60px;
         right: 0;
         background-color: #fff;
         flex-direction: column;
@@ -103,7 +100,6 @@
       }
     }
 
-    /* Contact page styles (unchanged) */
     .contact-title {
       text-align: center;
       margin-top: 7rem;
@@ -232,12 +228,15 @@
   <section class="contact-section">
     <div class="contact-form">
       <h2>Send a Message</h2>
-      <form>
+      <form 
+        action="https://formspree.io/f/meokabvb" 
+        method="POST"
+        onsubmit="this.innerHTML = '<p style=\'color: green;\'>Thanks! Your message has been sent.</p>'; return true;"
+      >
         <input type="text" name="name" placeholder="Your Name (required)" required>
         <input type="email" name="email" placeholder="Your Email (required)" required>
         <input type="tel" name="phone" placeholder="Phone Number">
         <textarea name="message" rows="5" placeholder="Additional Notes"></textarea>
-        <input type="file" name="attachment">
         <button type="submit">Submit</button>
       </form>
     </div>
@@ -263,7 +262,6 @@
   </div>
 
   <script>
-    // Toggle mobile menu open/close
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('nav-links');
 
@@ -272,9 +270,8 @@
       hamburger.classList.toggle('active');
     });
 
-    // Optional: allow toggle via keyboard (Enter or Space)
     hamburger.addEventListener('keydown', (e) => {
-      if(e.key === 'Enter' || e.key === ' ') {
+      if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         hamburger.click();
       }
