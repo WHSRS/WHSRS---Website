@@ -203,7 +203,6 @@
   <!-- Navigation Bar -->
   <nav>
     <div class="nav-logo">Women's Health Services of Roaring Spring</div>
-
     <div class="nav-links" id="nav-links">
       <a href="index.html">Home</a>
       <a href="about.html">Providers</a>
@@ -213,11 +212,8 @@
       <a href="https://www.medentmobile.com/portal/index.php?practice_id=4XG87sqe">Patient Portal</a>
       <a href="contact.html">Contact Us</a>
     </div>
-
     <div class="hamburger" id="hamburger" aria-label="Toggle menu" role="button" tabindex="0">
-      <div></div>
-      <div></div>
-      <div></div>
+      <div></div><div></div><div></div>
     </div>
   </nav>
 
@@ -228,17 +224,14 @@
   <section class="contact-section">
     <div class="contact-form">
       <h2>Send a Message</h2>
-      <form 
-        action="https://formspree.io/f/meokabvb" 
-        method="POST"
-        onsubmit="this.innerHTML = '<p style=\'color: green;\'>Thanks! Your message has been sent.</p>'; return true;"
-      >
+      <form id="contactForm">
         <input type="text" name="name" placeholder="Your Name (required)" required>
         <input type="email" name="email" placeholder="Your Email (required)" required>
         <input type="tel" name="phone" placeholder="Phone Number">
         <textarea name="message" rows="5" placeholder="Additional Notes"></textarea>
         <button type="submit">Submit</button>
       </form>
+      <div id="formResponse" style="margin-top: 1rem;"></div>
     </div>
     <div class="contact-info">
       <p><strong>Women's Health Services of Roaring Spring</strong><br>
@@ -262,6 +255,7 @@
   </div>
 
   <script>
+    // Mobile nav toggle
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('nav-links');
 
@@ -274,6 +268,42 @@
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         hamburger.click();
+      }
+    });
+
+    // AJAX form submission
+    document.getElementById('contactForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const formData = {
+        name: form.name.value,
+        email: form.email.value,
+        phone: form.phone.value,
+        message: form.message.value,
+      };
+
+      const responseDiv = document.getElementById('formResponse');
+
+      try {
+        const res = await fetch('https://formspree.io/f/meokabvb', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (res.ok) {
+          responseDiv.innerHTML = "<p style='color: green;'>Thank you! Your message was sent.</p>";
+          form.reset();
+        } else {
+          const data = await res.json();
+          responseDiv.innerHTML = `<p style="color: red;">Error: ${data.error || 'Something went wrong.'}</p>`;
+        }
+      } catch (error) {
+        responseDiv.innerHTML = `<p style="color: red;">Submission failed. Please try again later.</p>`;
+        console.error(error);
       }
     });
   </script>
