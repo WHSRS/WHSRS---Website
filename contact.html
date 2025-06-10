@@ -22,6 +22,7 @@
       scroll-behavior: smooth;
     }
 
+    /* === NAVIGATION BAR === */
     nav {
       width: 100%;
       background-color: #ffffff;
@@ -58,6 +59,7 @@
       color: #d46a92;
     }
 
+    /* Hamburger Menu Icon */
     .hamburger {
       display: none;
       flex-direction: column;
@@ -74,10 +76,11 @@
       transition: all 0.3s ease;
     }
 
+    /* === Responsive Styles === */
     @media (max-width: 768px) {
       .nav-links {
         position: fixed;
-        top: 60px;
+        top: 60px; /* below navbar */
         right: 0;
         background-color: #fff;
         flex-direction: column;
@@ -100,6 +103,7 @@
       }
     }
 
+    /* Contact page styles */
     .contact-title {
       text-align: center;
       margin-top: 7rem;
@@ -131,18 +135,28 @@
       color: #b23b6b;
     }
 
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
+    /* Updated form styles */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    label {
+      font-weight: bold;
+      display: flex;
+      flex-direction: column;
+      font-size: 1rem;
+      color: #333;
+    }
+    input, textarea {
       padding: 0.75rem;
-      margin-bottom: 1rem;
+      font-size: 1rem;
       border: 1px solid #ccc;
       border-radius: 8px;
       font-family: inherit;
-      font-size: 1rem;
+      resize: vertical;
     }
-
-    .contact-form button {
+    button {
       background-color: #d46a92;
       color: white;
       padding: 0.75rem 1.5rem;
@@ -152,8 +166,7 @@
       cursor: pointer;
       transition: background-color 0.3s;
     }
-
-    .contact-form button:hover {
+    button:hover {
       background-color: #b23b6b;
     }
 
@@ -196,11 +209,6 @@
         margin-top: 6rem;
       }
     }
-
-    #formResponse {
-      margin-top: 1rem;
-      font-weight: bold;
-    }
   </style>
 </head>
 <body>
@@ -208,6 +216,7 @@
   <!-- Navigation Bar -->
   <nav>
     <div class="nav-logo">Women's Health Services of Roaring Spring</div>
+
     <div class="nav-links" id="nav-links">
       <a href="index.html">Home</a>
       <a href="about.html">Providers</a>
@@ -217,6 +226,7 @@
       <a href="https://www.medentmobile.com/portal/index.php?practice_id=4XG87sqe">Patient Portal</a>
       <a href="contact.html">Contact Us</a>
     </div>
+
     <div class="hamburger" id="hamburger" aria-label="Toggle menu" role="button" tabindex="0">
       <div></div>
       <div></div>
@@ -231,13 +241,16 @@
   <section class="contact-section">
     <div class="contact-form">
       <h2>Send a Message</h2>
-      <form id="contactForm">
-        <input type="text" name="name" placeholder="Your Name (required)" required>
-        <input type="email" name="email" placeholder="Your Email (required)" required>
-        <input type="tel" name="phone" placeholder="Phone Number">
-        <textarea name="message" rows="5" placeholder="Additional Notes"></textarea>
-        <button type="submit">Submit</button>
-        <div id="formResponse"></div>
+      <form action="https://formspree.io/f/meokabvb" method="POST">
+        <label>
+          Your email:
+          <input type="email" name="email" required />
+        </label>
+        <label>
+          Your message:
+          <textarea name="message" rows="5" required></textarea>
+        </label>
+        <button type="submit">Send</button>
       </form>
     </div>
     <div class="contact-info">
@@ -262,7 +275,7 @@
   </div>
 
   <script>
-    // Toggle mobile menu
+    // Toggle mobile menu open/close
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('nav-links');
 
@@ -271,46 +284,11 @@
       hamburger.classList.toggle('active');
     });
 
+    // Optional: allow toggle via keyboard (Enter or Space)
     hamburger.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
+      if(e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         hamburger.click();
-      }
-    });
-
-    // Handle Form Submission
-    document.getElementById('contactForm').addEventListener('submit', async function (e) {
-      e.preventDefault();
-
-      const form = e.target;
-      const formData = new URLSearchParams();
-      formData.append('name', form.name.value);
-      formData.append('email', form.email.value);
-      formData.append('phone', form.phone.value);
-      formData.append('message', form.message.value);
-
-      const responseDiv = document.getElementById('formResponse');
-
-      try {
-        const res = await fetch('https://formspree.io/f/meokabvb', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          body: formData.toString(),
-        });
-
-        if (res.ok) {
-          responseDiv.innerHTML = "<p style='color: green;'>Thank you! Your message was sent.</p>";
-          form.reset();
-        } else {
-          const data = await res.json();
-          responseDiv.innerHTML = `<p style="color: red;">Error: ${data.error || 'Something went wrong.'}</p>`;
-        }
-      } catch (error) {
-        responseDiv.innerHTML = `<p style="color: red;">Submission failed. Please try again later.</p>`;
-        console.error(error);
       }
     });
   </script>
