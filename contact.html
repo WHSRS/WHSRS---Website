@@ -196,6 +196,11 @@
         margin-top: 6rem;
       }
     }
+
+    #formResponse {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -213,7 +218,9 @@
       <a href="contact.html">Contact Us</a>
     </div>
     <div class="hamburger" id="hamburger" aria-label="Toggle menu" role="button" tabindex="0">
-      <div></div><div></div><div></div>
+      <div></div>
+      <div></div>
+      <div></div>
     </div>
   </nav>
 
@@ -230,8 +237,8 @@
         <input type="tel" name="phone" placeholder="Phone Number">
         <textarea name="message" rows="5" placeholder="Additional Notes"></textarea>
         <button type="submit">Submit</button>
+        <div id="formResponse"></div>
       </form>
-      <div id="formResponse" style="margin-top: 1rem;"></div>
     </div>
     <div class="contact-info">
       <p><strong>Women's Health Services of Roaring Spring</strong><br>
@@ -255,7 +262,7 @@
   </div>
 
   <script>
-    // Mobile nav toggle
+    // Toggle mobile menu
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('nav-links');
 
@@ -271,17 +278,16 @@
       }
     });
 
-    // AJAX form submission
+    // Handle Form Submission
     document.getElementById('contactForm').addEventListener('submit', async function (e) {
       e.preventDefault();
 
       const form = e.target;
-      const formData = {
-        name: form.name.value,
-        email: form.email.value,
-        phone: form.phone.value,
-        message: form.message.value,
-      };
+      const formData = new URLSearchParams();
+      formData.append('name', form.name.value);
+      formData.append('email', form.email.value);
+      formData.append('phone', form.phone.value);
+      formData.append('message', form.message.value);
 
       const responseDiv = document.getElementById('formResponse');
 
@@ -289,9 +295,10 @@
         const res = await fetch('https://formspree.io/f/meokabvb', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Accept': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded'
           },
-          body: JSON.stringify(formData),
+          body: formData.toString(),
         });
 
         if (res.ok) {
